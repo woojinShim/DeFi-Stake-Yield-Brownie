@@ -2,15 +2,16 @@ from brownie import (
     network,
     accounts,
     config,
+    interface,
     LinkToken,
     MockV3Aggregator,
-    MockDAI,
     MockWETH,
+    MockDAI,
     Contract,
 )
-from web3 import Web3
 
 INITIAL_PRICE_FEED_VALUE = 2000000000000000000000
+DECIMALS = 18
 
 NON_FORKED_LOCAL_BLOCKCHAIN_ENVIRONMENTS = ["hardhat", "development", "ganache"]
 LOCAL_BLOCKCHAIN_ENVIRONMENTS = NON_FORKED_LOCAL_BLOCKCHAIN_ENVIRONMENTS + [
@@ -26,9 +27,6 @@ contract_to_mock = {
     "weth_token": MockWETH,
 }
 
-DECIMALS = 18
-INITIAL_VALUE = Web3.toWei(2000, "ether")
-
 
 def get_account(index=None, id=None):
     if index:
@@ -42,17 +40,17 @@ def get_account(index=None, id=None):
 
 def get_contract(contract_name):
     """If you want to use this function, go to the brownie config and add a new entry for
-    the contract that you want to be able to 'get'. Then add an entry in the variable 'contract_to_mock'.
+    the contract that you want to be able to 'get'. Then add an entry in the in the variable 'contract_to_mock'.
     You'll see examples like the 'link_token'.
         This script will then either:
             - Get a address from the config
             - Or deploy a mock to use for a network that doesn't have it
         Args:
-            contract_name (string): This is the name that is referred to in the
+            contract_name (string): This is the name that is refered to in the
             brownie config and 'contract_to_mock' variable.
         Returns:
             brownie.network.contract.ProjectContract: The most recently deployed
-            Contract of the type specificed by the dictionary. This could be either
+            Contract of the type specificed by the dictonary. This could be either
             a mock or the 'real' contract on a live network.
     """
     contract_type = contract_to_mock[contract_name]
@@ -81,16 +79,23 @@ def fund_with_link(
 ):
     account = account if account else get_account()
     link_token = link_token if link_token else get_contract("link_token")
-    ### Keep this line to show how it could be done without deploying a mock
-    # tx = interface.LinkTokenInterface(link_token.address).transfer(
-    #     contract_address, amount, {"from": account}
-    # )
-    tx = link_token.transfer(contract_address, amount, {"from": account})
+    tx = interface.LinkTokenInterface(link_token).transfer(
+        contract_address, amount, {"from": account}
+    )
     print("Funded {}".format(contract_address))
     return tx
 
 
-def deploy_mocks(decimals=DECIMALS, initial_value=INITIAL_VALUE):
+def get_verify_status():
+    verify = (
+        config["networks"][network.show_active()]["verify"]
+        if config["networks"][network.show_active()].get("verify")
+        else False
+    )
+    return verify
+
+
+def deploy_mocks(decimals=DECIMALS, initial_value=INITIAL_PRICE_FEED_VALUE):
     """
     Use this script if you want to deploy mocks to a testnet
     """

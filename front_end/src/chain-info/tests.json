@@ -20,22 +20,21 @@
       "coverage": false,
       "isolated": false,
       "results": "s",
-      "sha1": "ce0df15e92cca733050ecea47016799da86d5e0f",
+      "sha1": "9b51f5cdc65bf94fa6bfa1009dafa189ade1e452",
       "txhash": []
     },
     "tests/unit/test_token_farm.py": {
       "coverage": false,
       "isolated": false,
-      "results": ".....F.",
-      "sha1": "9626795ca9a869de652cec5de8712748ab60ce08",
+      "results": "...",
+      "sha1": "6ff6688c7c9d3428d97d370bc1b896fc7b4e683c",
       "txhash": [
-        "4be29ce36e70690e800f6d084ae459990cf0fe1e",
-        "bef70040e21d93fd613fc8fdd2011ade3f516f38"
+        "f53c112cec066bba03f321f18589821c8b240e5a"
       ]
     }
   },
   "tx": {
-    "4be29ce36e70690e800f6d084ae459990cf0fe1e": {
+    "f53c112cec066bba03f321f18589821c8b240e5a": {
       "TokenFarm": {
         "0": [
           [],
@@ -44,27 +43,6 @@
         ],
         "2": [
           [],
-          [],
-          []
-        ],
-        "4": [
-          [],
-          [],
-          []
-        ]
-      }
-    },
-    "bef70040e21d93fd613fc8fdd2011ade3f516f38": {
-      "TokenFarm": {
-        "0": [
-          [],
-          [],
-          []
-        ],
-        "2": [
-          [
-            7
-          ],
           [],
           []
         ],

@@ -14,6 +14,6 @@ https://kovan.etherscan.io/address/0xde49f367a2409e132472b66656313d7f405db52d#co
 https://www.youtube.com/watch?v=tr3sKBqtGsM
 
 ### 차후 계획
-1. UI Unstake 기능 만들기  
+1. UI에 Unstake 기능 만들기  
 2. 도커 이미지 빌드 후 메인넷에 
 

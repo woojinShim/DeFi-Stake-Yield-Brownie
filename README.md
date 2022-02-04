@@ -15,5 +15,5 @@ https://www.youtube.com/watch?v=tr3sKBqtGsM
 
 ### 차후 계획
 1. UI에 Unstake 기능 만들기  
-2. 도커 이미지 빌드 후 메인넷에 
+2. 도커 이미지 빌드 후 메인넷에 배포하기
 
